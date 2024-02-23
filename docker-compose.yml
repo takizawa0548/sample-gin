@@ -1,0 +1,15 @@
+version: '3'
+services:
+ golang:
+  #プロジェクトを新規作成したい時はコメントアウトのコマンドを実行
+  #docker compose run golang \
+  #bash -c "curl https://raw.githubusercontent.com/gin-gonic/examples/master/basic/main.go > main.go \
+  #&& go mod init github.com/takizawa0548/project \
+  #&& go mod tidy"
+  image: golang:latest
+  ports:
+   - 8080:8080
+  volumes:
+   - ./app:/go/src/github.com/takizawa0548/project
+  working_dir: /go/src/github.com/takizawa0548/project
+  command: bash -c "go install github.com/cosmtrek/air@latest && go mod tidy && air"
